@@ -49,47 +49,56 @@ const styles = StyleSheet.create({
   }
 });
 
-const Task = () => {
-  const { complete } = this.props;
+const Task = ({
+  onToggleEdit,
+  text,
+  onRemove,
+  onUpdate,
+  onComplete,
+  editing
+}) => {
+  const { complete } = {
+    onToggleEdit,
+    text,
+    onRemove,
+    onUpdate,
+    onComplete,
+    editing
+  };
   const textComponent = (
     <TouchableOpacity
       style={styles.textWrap}
-      onLongPress={() => this.props.onToggleEdit(true)}
+      onLongPress={() => onToggleEdit(true)}
     >
-      <Text style={[styles.text, complete && styles.complete]}>
-        {this.props.text}
-      </Text>
+      <Text style={[styles.text, complete && styles.complete]}>{text}</Text>
     </TouchableOpacity>
   );
   const removeButton = (
-    <TouchableOpacity onPress={this.props.onRemove}>
+    <TouchableOpacity onPress={onRemove}>
       <Text style={styles.destroy}>X</Text>
     </TouchableOpacity>
   );
   const editingComponent = (
     <View style={styles.textWrap}>
       <TextInput
-        onChangeText={this.props.onUpdate}
+        onChangeText={onUpdate}
         autoFocus
-        value={this.props.text}
+        value={text}
         style={styles.input}
         multiline
       />
     </View>
   );
   const doneButton = (
-    <TouchableOpacity
-      style={styles.done}
-      onPress={() => this.props.onToggleEdit(false)}
-    >
+    <TouchableOpacity style={styles.done} onPress={() => onToggleEdit(false)}>
       <Text style={styles.doneText}>Save</Text>
     </TouchableOpacity>
   );
   return (
     <View style={styles.container}>
-      <Switch value={complete} onValueChange={this.props.onComplete} />
-      {this.props.editing ? editingComponent : textComponent}
-      {this.props.editing ? doneButton : removeButton}
+      <Switch value={complete} onValueChange={onComplete} />
+      {editing ? editingComponent : textComponent}
+      {editing ? doneButton : removeButton}
     </View>
   );
 };

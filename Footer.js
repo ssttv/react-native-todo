@@ -22,32 +22,32 @@ const styles = StyleSheet.create({
   }
 });
 
-const Footer = () => {
-  const { filter } = this.props;
+const Footer = ({ count, onFilter, onClearComplete }) => {
+  const { filter } = { count, onFilter, onClearComplete };
   return (
     <View style={styles.container}>
-      <Text>{this.props.count} count</Text>
+      <Text>{count} count</Text>
       <View style={styles.filters}>
         <TouchableOpacity
           style={[styles.filter, filter === "ALL" && styles.selected]}
-          onPress={() => this.props.onFilter("ALL")}
+          onPress={() => onFilter("ALL")}
         >
           <Text>All</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={[styles.filter, filter === "ACTIE" && styles.selected]}
-          onPress={() => this.props.onFilter("ACTIVE")}
+          onPress={() => onFilter("ACTIVE")}
         >
           <Text>Active</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={[styles.filter, filter === "COMPLETED" && styles.selected]}
-          onPress={() => this.props.onFilter("COMPLETED")}
+          onPress={() => onFilter("COMPLETED")}
         >
           <Text>Completed</Text>
         </TouchableOpacity>
       </View>
-      <TouchableOpacity onPress={() => this.props.onClearComplete()}>
+      <TouchableOpacity onPress={() => onClearComplete()}>
         <Text>Clear Completed</Text>
       </TouchableOpacity>
     </View>
