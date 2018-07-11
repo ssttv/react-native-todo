@@ -8,6 +8,7 @@ import {
   Keyboard,
   AsyncStorage
 } from "react-native";
+import { SafeAreaView } from "react-navigation";
 import Header from "./Header";
 import Footer from "./Footer";
 import Row from "./Task";
@@ -19,6 +20,9 @@ const styles = StyleSheet.create({
     ...Platform.select({
       ios: {
         paddingTop: 30
+      },
+      android: {
+        paddingTop: 20
       }
     })
   },
