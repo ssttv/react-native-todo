@@ -1,5 +1,5 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React from "react";
+import { StyleSheet, Text, View, Platform } from "react-native";
 
 export default class App extends React.Component {
   render() {
@@ -16,8 +16,31 @@ export default class App extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: "#F5F5F5",
+    ...Platform.select({
+      ios: {
+        paddingTop: 30
+      }
+    })
   },
+  content: {
+    flex: 1
+  },
+  list: {
+    backgroundColor: "#FFF"
+  },
+  separator: {
+    borderWidth: 1,
+    borderColor: "#F5F5F5"
+  },
+  loading: {
+    position: "absolute",
+    left: 0,
+    top: 0,
+    right: 0,
+    bottom: 0,
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "rgba(0, 0, 0, .2)"
+  }
 });
