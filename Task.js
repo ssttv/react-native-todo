@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from "react";
 import {
   View,
   Text,
@@ -49,58 +49,51 @@ const styles = StyleSheet.create({
   }
 });
 
-const Task = ({
-  onToggleEdit,
-  text,
-  onRemove,
-  onUpdate,
-  onComplete,
-  editing
-}) => {
-  const { complete } = {
-    onToggleEdit,
-    text,
-    onRemove,
-    onUpdate,
-    onComplete,
-    editing
-  };
-  const textComponent = (
-    <TouchableOpacity
-      style={styles.textWrap}
-      onLongPress={() => onToggleEdit(true)}
-    >
-      <Text style={[styles.text, complete && styles.complete]}>{text}</Text>
-    </TouchableOpacity>
-  );
-  const removeButton = (
-    <TouchableOpacity onPress={onRemove}>
-      <Text style={styles.destroy}>X</Text>
-    </TouchableOpacity>
-  );
-  const editingComponent = (
-    <View style={styles.textWrap}>
-      <TextInput
-        onChangeText={onUpdate}
-        autoFocus
-        value={text}
-        style={styles.input}
-        multiline
-      />
-    </View>
-  );
-  const doneButton = (
-    <TouchableOpacity style={styles.done} onPress={() => onToggleEdit(false)}>
-      <Text style={styles.doneText}>Save</Text>
-    </TouchableOpacity>
-  );
-  return (
-    <View style={styles.container}>
-      <Switch value={complete} onValueChange={onComplete} />
-      {editing ? editingComponent : textComponent}
-      {editing ? doneButton : removeButton}
-    </View>
-  );
-};
+class Task extends Component {
+  render() {
+    const { complete } = this.props;
+    const textComponent = (
+      <TouchableOpacity
+        style={styles.textWrap}
+        onLongPress={() => this.props.onToggleEdit(true)}
+      >
+        <Text style={[styles.text, complete && styles.complete]}>
+          {this.props.text}
+        </Text>
+      </TouchableOpacity>
+    );
+    const removeButton = (
+      <TouchableOpacity onPress={this.props.onRemove}>
+        <Text style={styles.destroy}>X</Text>
+      </TouchableOpacity>
+    );
+    const editingComponent = (
+      <View style={styles.textWrap}>
+        <TextInput
+          onChangeText={this.props.onUpdate}
+          autoFocus
+          value={this.props.text}
+          style={styles.input}
+          multiline
+        />
+      </View>
+    );
+    const doneButton = (
+      <TouchableOpacity
+        style={styles.done}
+        onPress={() => this.props.onToggleEdit(false)}
+      >
+        <Text style={styles.doneText}>Save</Text>
+      </TouchableOpacity>
+    );
+    return (
+      <View style={styles.container}>
+        <Switch value={complete} onValueChange={this.props.onComplete} />
+        {this.props.editing ? editingComponent : textComponent}
+        {this.props.editing ? doneButton : removeButton}
+      </View>
+    );
+  }
+}
 
 export default Task;

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 
 const styles = StyleSheet.create({
@@ -22,36 +22,38 @@ const styles = StyleSheet.create({
   }
 });
 
-const Footer = ({ count, onFilter, onClearComplete }) => {
-  const { filter } = { count, onFilter, onClearComplete };
-  return (
-    <View style={styles.container}>
-      <Text>{count} count</Text>
-      <View style={styles.filters}>
-        <TouchableOpacity
-          style={[styles.filter, filter === "ALL" && styles.selected]}
-          onPress={() => onFilter("ALL")}
-        >
-          <Text>All</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={[styles.filter, filter === "ACTIE" && styles.selected]}
-          onPress={() => onFilter("ACTIVE")}
-        >
-          <Text>Active</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={[styles.filter, filter === "COMPLETED" && styles.selected]}
-          onPress={() => onFilter("COMPLETED")}
-        >
-          <Text>Completed</Text>
+class Footer extends Component {
+  render() {
+    const { filter } = this.props;
+    return (
+      <View style={styles.container}>
+        <Text>{this.props.count} count</Text>
+        <View style={styles.filters}>
+          <TouchableOpacity
+            style={[styles.filter, filter === "ALL" && styles.selected]}
+            onPress={() => this.props.onFilter("ALL")}
+          >
+            <Text>All</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={[styles.filter, filter === "ACTIE" && styles.selected]}
+            onPress={() => this.props.onFilter("ACTIVE")}
+          >
+            <Text>Active</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={[styles.filter, filter === "COMPLETED" && styles.selected]}
+            onPress={() => this.props.onFilter("COMPLETED")}
+          >
+            <Text>Completed</Text>
+          </TouchableOpacity>
+        </View>
+        <TouchableOpacity onPress={() => this.props.onClearComplete()}>
+          <Text>Clear Completed</Text>
         </TouchableOpacity>
       </View>
-      <TouchableOpacity onPress={() => onClearComplete()}>
-        <Text>Clear Completed</Text>
-      </TouchableOpacity>
-    </View>
-  );
-};
+    );
+  }
+}
 
 export default Footer;

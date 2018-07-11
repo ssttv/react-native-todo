@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from "react";
 import {
   View,
   Text,
@@ -25,21 +25,25 @@ const styles = StyleSheet.create({
   }
 });
 
-const Header = ({ onToggleAllComplete, value, onChange, onAddItem }) => (
-  <View style={styles.header}>
-    <TouchableOpacity onPress={onToggleAllComplete}>
-      <Text style={styles.toggleIcon}>{String.fromCharCode(10003)}</Text>
-    </TouchableOpacity>
-    <TextInput
-      value={value}
-      onChangeText={onChange}
-      onSubmitEditing={onAddItem}
-      placeholder="What needs to be done?"
-      blurOnSubmit={false}
-      returnKeyType="done"
-      style={styles.input}
-    />
-  </View>
-);
+class Header extends Component {
+  render() {
+    return (
+      <View style={styles.header}>
+        <TouchableOpacity onPress={this.props.onToggleAllComplete}>
+          <Text style={styles.toggleIcon}>{String.fromCharCode(10003)}</Text>
+        </TouchableOpacity>
+        <TextInput
+          value={this.props.value}
+          onChangeText={this.props.onChange}
+          onSubmitEditing={this.props.onAddItem}
+          placeholder="What needs to be done?"
+          blurOnSubmit={false}
+          returnKeyType="done"
+          style={styles.input}
+        />
+      </View>
+    );
+  }
+}
 
 export default Header;
